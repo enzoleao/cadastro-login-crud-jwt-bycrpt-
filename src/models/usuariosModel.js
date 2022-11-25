@@ -17,6 +17,10 @@ const usuariosModel = database.define('usuarios', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    admin:{
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+    },
 })
  
 module.exports = usuariosModel;

@@ -1,18 +1,17 @@
 const cadastroRepository = require('../repository/cadastroRepository')
-<<<<<<< HEAD
 
 
 const cadastro = async(req,res)=>{
   const resultadoCadastro = await cadastroRepository.cadastro(req.body);
   return res.status(201).json(resultadoCadastro)
-=======
+}
+const teste = async(req,res)=>{
+    const {a,b} = req.body
 
-const cadastro = async(req,res)=>{
-    
-    const resultCadastro = await cadastroRepository.cadastro(req.body);
-    return res.status(201).json(resultCadastro)
->>>>>>> cb1921c6c3d3e55e55879c6a6d929ad05f5a5db4
+    var teste
+    console.log(teste)
 }
 module.exports={
-    cadastro
+    cadastro,
+    teste
 }
