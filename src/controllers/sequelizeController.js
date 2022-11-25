@@ -1,41 +1,20 @@
-const produtosModel = require('../models/produtosModel')
+const sequelizerRepository = require('../repository/sequelizeRepository')
 
 const getInfo = async (req,res) =>{
-    const getAllProducts = await produtosModel.findAll();
+    const getAllProducts = await sequelizerRepository.getInfo();
     return res.status(200).json(getAllProducts)
 }
 const createProduct = async(req,res)=>{
-    const {nome, preco, descricao} = req.body
-    await produtosModel.create({
-        nome:nome,
-        preco:preco,
-        descricao:descricao
-    })
-    .then(()=>{return res.status(201).json({message:"Cadastrado com sucesso"})})
-    .catch(()=>{return res.status(400).json({message:"Ocorreu algum erro."})})
+    const cadastrarProduto = await sequelizerRepository.createProduct(req.body)
+    return res.status(201).json(cadastrarProduto)
 }
 const updateProduct = async(req,res)=>{
-    const {nome, preco, descricao} = req.body
-    await produtosModel.update(
-        {
-            nome:nome,
-            preco:preco,
-            descricao:descricao
-        },
-        {
-            where:{
-                id: req.params.id
-            }
-        }
-    ).then(()=>{return res.status(200).json({message:"Atualizado com sucesso"})})
-     .catch(()=>{return res.status(400).json({message:"Erro ao atualizar"})})
+    const updateProduct = await sequelizerRepository.updateProduct(req.body, req.params)
+    return res.status(200).json(updateProduct)
 }
 const productDelete = async(req,res)=>{
-    await produtosModel.destroy({
-        where:{
-            id:req.params.id
-        }
-    }).then(()=>{return res.status(200).json({message:"Deletado com sucesso"})})
+    const productDelete = await sequelizerRepository.productDelete(req.params.id)
+    return res.status(200).json(productDelete)
 }
 module.exports={
     getInfo,
